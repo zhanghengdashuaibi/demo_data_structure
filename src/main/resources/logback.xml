@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<configuration>
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">  
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">  
+            <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} | msdemo | %-5level | %thread | %logger{56}.%method | %L : %msg%n</Pattern>
+        </encoder>  
+    </appender>
+    
+    <root level="debug">
+        <appender-ref ref="stdout" />
+    </root>  
+    
+</configuration>

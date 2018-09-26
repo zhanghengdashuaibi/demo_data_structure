@@ -1,7 +1,10 @@
+package com.demo;
+
 import com.demo.link.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Map;
-import java.util.Random;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,9 +12,13 @@ import java.util.regex.Pattern;
 /**
  * Created by 蜡笔小新不爱吃青椒 on 2018/9/14.
  */
-public class demo {
+@SpringBootApplication
+public class DemoApplication {
 
     public static void main (String[] arg){
+
+        SpringApplication.run(DemoApplication.class, arg);
+
 
         String input = "(2.5+3.8)*0.6";
 //        String input = "2.5+3.8*6";

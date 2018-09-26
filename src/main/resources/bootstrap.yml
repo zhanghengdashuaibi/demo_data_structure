@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: msdemo
+  cloud:
+    config:
+      uri: http://user:123456@localhost:8888/
+server:
+  port: 8080
