@@ -1,5 +1,6 @@
 package com.demo;
 
+import com.demo.iterator.InterIterator;
 import com.demo.link.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -132,9 +133,35 @@ public class DemoApplication {
 //        System.out.println("-----------从last端删除----------");
 //        doublyLinkedList.deleteFirst();
 //        doublyLinkedList.displayForward();
-        System.out.println("-----------从指定位置添加链结点");
+        System.out.println("-----------从指定位置添加链结点---------");
         doublyLinkedList.insertAfter(1,4);
         doublyLinkedList.displayForward();
+        System.out.println("-----------链表迭代器-----------");
+        InterIterator.LinkList linkList1 = new InterIterator.LinkList();
+        InterIterator.ListIterator iterator = linkList1.getIterator();
+        iterator.insertBefore(1);
+        iterator.insertBefore(2);
+        iterator.insertAfter(3);
+
+        //当前链结点
+//        InterIterator.Link current = iterator.getCurrent();
+//        long value = current.getdData();
+//        System.out.println(value);
+        /**
+         * 遍历
+         */
+        iterator.reset();//从头部链结点开始
+        while(!iterator.atEnd()){
+            //当前链结点
+            InterIterator.Link current = iterator.getCurrent();
+            long value = current.getdData();
+            if(value==3){
+                //删除
+                iterator.deleteCurrent();
+            }
+            iterator.nextLink();
+            System.out.println(value);
+        }
 
     }
 
