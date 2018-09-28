@@ -2,9 +2,11 @@ package com.demo;
 
 import com.demo.iterator.InterIterator;
 import com.demo.link.*;
+import com.demo.list.MyArrayList;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -144,23 +146,35 @@ public class DemoApplication {
         iterator.insertAfter(3);
 
         //当前链结点
-//        InterIterator.Link current = iterator.getCurrent();
-//        long value = current.getdData();
-//        System.out.println(value);
+        InterIterator.Link current = iterator.getCurrent();
+        long value = current.getdData();
+        System.out.println(value);
         /**
          * 遍历
          */
         iterator.reset();//从头部链结点开始
         while(!iterator.atEnd()){
+
             //当前链结点
-            InterIterator.Link current = iterator.getCurrent();
-            long value = current.getdData();
-            if(value==3){
-                //删除
-                iterator.deleteCurrent();
-            }
+            InterIterator.Link current1 = iterator.getCurrent();
+            long value1 = current1.getdData();
             iterator.nextLink();
-            System.out.println(value);
+//            if(value1==3){
+//                //删除
+//                iterator.deleteCurrent();
+//            }
+            System.out.println(value1);
+        }
+
+        System.out.println("------------MyArrayList------");
+        MyArrayList<Integer> arrayList = new MyArrayList<>();
+        arrayList.add(1);
+        arrayList.add(2);
+        arrayList.remove(1);
+        Iterator<Integer> iterator1 = arrayList.iterator();
+        while(iterator1.hasNext()){
+            Integer next = iterator1.next();
+            System.out.println(next);
         }
 
     }

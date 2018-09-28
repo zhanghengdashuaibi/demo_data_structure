@@ -76,13 +76,13 @@ public class MyArrayList<T> implements Iterable<T> {
          */
         //老数组
         T[] oldElement = element;
-        //        element = (T[]) new Object[newCapacity];
+                element = (T[]) new Object[newCapacity];
         //新数组覆盖
-        T[] newElement = (T[]) new Object[newCapacity];
-        for (int i = 0; i <oldElement.length ; i++) {
-            newElement[i] = oldElement[i];
+//        T[] newElement = (T[]) new Object[newCapacity];
+        for (int i = 0; i <size() ; i++) {
+            element[i] = oldElement[i];
         }
-        element = newElement;//扩容完成
+//        element = newElement;//扩容完成
     }
 
     /**
