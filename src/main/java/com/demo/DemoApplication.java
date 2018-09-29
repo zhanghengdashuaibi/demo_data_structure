@@ -3,6 +3,7 @@ package com.demo;
 import com.demo.iterator.InterIterator;
 import com.demo.link.*;
 import com.demo.list.MyArrayList;
+import com.demo.list.MyLinkedList;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -170,13 +171,26 @@ public class DemoApplication {
         MyArrayList<Integer> arrayList = new MyArrayList<>();
         arrayList.add(1);
         arrayList.add(2);
-        arrayList.remove(1);
+//        arrayList.remove(1);
         Iterator<Integer> iterator1 = arrayList.iterator();
         while(iterator1.hasNext()){
             Integer next = iterator1.next();
             System.out.println(next);
         }
 
+        System.out.println("-----------LinkedList---------");
+        MyLinkedList<Integer> linkedList = new MyLinkedList<>();
+        linkedList.addFirst(1);
+        linkedList.addFirst(2);
+        Iterator<Integer> iterator2 = linkedList.iterator();
+        while (iterator2.hasNext()){
+            Integer next = iterator2.next();
+            System.out.println(next);
+        }
+//        Integer integer = linkedList.get(1);
+//        Integer remove = linkedList.remove(1);
+//        System.out.println(remove);
+//        linkedList.add(2);
     }
 
     /**

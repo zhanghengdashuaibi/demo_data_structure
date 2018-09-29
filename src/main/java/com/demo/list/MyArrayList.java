@@ -259,7 +259,7 @@ public class MyArrayList<T> implements Iterable<T> {
      * 简化版
      */
     private class ArrayListIterator implements Iterator<T>{
-        private int current = 0;
+        private int current = 0;//当前下标位
 
 
         /**
