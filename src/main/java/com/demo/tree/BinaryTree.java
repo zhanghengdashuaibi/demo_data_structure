@@ -105,6 +105,18 @@ public class BinaryTree {
         }
 
         /**
+         * 遍历树
+         */
+        public void printTree(){
+            if(isEmpty()){
+               //为空
+                System.out.print("空树!");
+            }else{
+                printTree(root);
+            }
+        }
+
+        /**
          * tree中是否存在节点X
          * 存在返回 true 反之 false
          */
@@ -231,6 +243,19 @@ public class BinaryTree {
                 }
             }
             return t;
+        }
+
+        /**
+         * 遍历树
+         * 中序遍历
+         */
+        private void printTree(BinaryNode<T> t){
+            if(t != null){
+                printTree(t.left);//遍历左树
+                System.out.print(t.element);
+                printTree(t.right);//遍历右树
+            }
+
         }
     }
 
