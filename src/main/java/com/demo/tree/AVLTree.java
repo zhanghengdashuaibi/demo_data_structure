@@ -81,19 +81,19 @@ public class AVLTree {
             //反之不是空树的情况
             //左树高于右树的不平衡情况
             if(height(t.left) - height(t.right) > ALLOWED_IMBALANCE){
-                //只通过左旋转就能平衡的情况
+                //只通过LL单旋转就能平衡的情况
                 if(height(t.left.left) >= height(t.left.right)){
-                    t = this.rotateLeft(t);
+                    t = this.leftLeftrotate(t);//调用旋转左树的方法
                 }else{
                     //需要通过左-右双旋转才能平衡的情况
                     t =this.leftRightRotate(t);
                 }
             }else if(height(t.right) - height(t.left) > ALLOWED_IMBALANCE){
                 //右树高于左树的不平衡情况
-                //只通过右旋转就能平衡的情况
+                //只通过RR单旋转就能平衡的情况
                 if(height(t.right.right) >= height(t.right.left)){
-                     //需要通过一次右旋转才能平衡
-                    t = this.rotateRight(t);
+                     //需要通过一次RR单旋转才能平衡
+                    t = this.rightRightrotate(t);
                 }else{
                     //需要通过右-左双旋转才能平衡
                     t = this.rightLeftRotate(t);
@@ -107,12 +107,10 @@ public class AVLTree {
         }
 
         /**
-         * 在节点上进行左旋转
-         * 将k2的左子节点k1变成根节点
-         * k2变成k1的右子节点
-         * k1的右子树变成k2的左子树
+         * LL单旋转---往左儿子的左子树插入数据失去平衡(将左子树节点上移,将右子树节点下移)
+         * 左子树高于右子树 并且达到不平衡点 高度相差大于1
          */
-         private AVLNode<T> rotateLeft(AVLNode<T> k2){
+         private AVLNode<T> leftLeftrotate(AVLNode<T> k2){
              AVLNode<T> k1 = k2.left;
              k2.left = k1.right;
              k1.right = k2;
@@ -123,12 +121,10 @@ public class AVLTree {
              return k1;
          }
         /**
-         * 在节点上进行右旋转
-         * k1的右子节点k2变成根节点
-         * k2的左子节点变成k1的右子节点
-         * k1变成k2的左子节点
+         * RR单旋转----往右儿子的右子树插入数据失去平衡(将右子树节点上移,将左子树节点下移)
+         * 右子树高于左子树 并且达到不平衡点 高度差大于1
          */
-         private AVLNode<T> rotateRight(AVLNode<T> k1){
+         private AVLNode<T> rightRightrotate(AVLNode<T> k1){
              AVLNode<T> k2 = k1.right;
              k1.right = k2.left;
              k2.left = k1;
@@ -141,31 +137,29 @@ public class AVLTree {
          }
 
         /**
-         * 左-右旋转(双旋转)
-         * 先对k1进行右旋转得到k2
-         * 再对k3进行左旋转
+         * LR双旋转--->左-右旋转(双旋转)
+         * 往左儿子的右子树插入数据失去平衡(先进行RR单旋转,再进行LL单旋转)
          */
         private AVLNode<T> leftRightRotate(AVLNode<T> k3){
-            //先对k1进行右旋转得到k2
-            AVLNode<T> k2 = this.rotateRight(k3.left);
+            //先对k1进行RR单旋转得到k2
+            AVLNode<T> k2 = this.rightRightrotate(k3.left);
             //此时k3的左子节点是k2
             k3.left = k2;
             //再对k3进行左旋转
-            return this.rotateLeft(k3);
+            return this.leftLeftrotate(k3);
         }
 
         /**
-         * 右-左旋转
-         * 先对k3进行左旋转得到k2
-         * 再对k1进行右旋转
+         * RL双旋转--->右-左旋转
+         * 往右儿子的左子树插入数据失去平衡(先进行LL单旋转,再进行RR单旋转)
          */
         private AVLNode<T> rightLeftRotate(AVLNode<T> k1){
-           //先对k3进行左旋转得到k2
-            AVLNode<T> k2 = this.rotateLeft(k1.right);
+           //先对k3进行LL单旋转得到k2
+            AVLNode<T> k2 = this.leftLeftrotate(k1.right);
             //此时k1的右边节点是k2
             k1.right = k2;
             //再对k1进行右旋转
-            return this.rotateRight(k1);
+            return this.leftLeftrotate(k1);
         }
     }
 
