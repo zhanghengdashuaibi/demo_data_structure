@@ -105,14 +105,38 @@ public class BinaryTree {
         }
 
         /**
-         * 遍历树
+         * 遍历树--->中序遍历
          */
-        public void printTree(){
+        public void printTreeIn(){
             if(isEmpty()){
                //为空
                 System.out.print("空树!");
             }else{
-                printTree(root);
+                printTreeIn(root);
+            }
+        }
+
+        /**
+         * 前序遍历
+         */
+        public void printTreePre(){
+            if(isEmpty()){
+                //空树
+                System.out.print("空树!");
+            }else{
+                printTreePre(root);
+            }
+        }
+
+        /**
+         * 后序遍历
+         */
+        public void printTreeNext(){
+            if(isEmpty()){
+                //空树
+                System.out.print("空树!");
+            }else{
+                printTreeNext(root);
             }
         }
 
@@ -249,14 +273,37 @@ public class BinaryTree {
          * 遍历树
          * 中序遍历
          */
-        private void printTree(BinaryNode<T> t){
+        private void printTreeIn(BinaryNode<T> t){
             if(t != null){
-                printTree(t.left);//遍历左树
-                System.out.print(t.element);
-                printTree(t.right);//遍历右树
+                printTreeIn(t.left);//遍历左树
+                System.out.print("中序遍历:"+t.element);
+                printTreeIn(t.right);//遍历右树
             }
 
         }
+
+        /**
+         * 前序遍历树
+         */
+        private void printTreePre(BinaryNode<T> t){
+            if(t != null){
+                System.out.print("前序遍历:"+t.element);
+                printTreePre(t.left);
+                printTreePre(t.right);
+            }
+        }
+
+        /**
+         * 后序遍历
+         */
+        private void printTreeNext(BinaryNode<T> t){
+            if(t != null){
+                printTreeNext(t.left);
+                printTreeNext(t.right);
+                System.out.print("后序遍历:"+t.element);
+            }
+        }
+
     }
 
 }
