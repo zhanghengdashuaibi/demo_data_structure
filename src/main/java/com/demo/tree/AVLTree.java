@@ -46,6 +46,30 @@ public class AVLTree {
         }
 
         /**
+         * 查找最小节点
+         */
+        private AVLNode<T> findMin(AVLNode<T> t){
+            if(t == null){
+                return null;
+            }else if(t.left == null){
+                return t;
+            }
+            return findMin(t.left);
+        }
+
+        /**
+         * 查找最大节点
+         */
+        private AVLNode<T> findMax(AVLNode<T> t){
+            if(t == null){
+                return null;
+            }else if(t.right == null){
+                return t;
+            }
+            return findMax(t.right);
+        }
+
+        /**
          * 添加
          */
         private AVLNode<T> insert(T x,AVLNode<T> t){
@@ -67,6 +91,37 @@ public class AVLTree {
             }
             //调用平衡树的算法
             return balance(t);
+        }
+
+        /**
+         * 移除
+         */
+        public AVLNode<T> remove(T x,AVLNode<T> t){
+            if(t == null){
+                //空树情况下不做任何处理
+                return t;
+            }
+            //反之 要移除的节点 与树中原有的节点作比较
+            int compareResult = x.compareTo(t.element);
+            if(compareResult < 0){
+                //从左子树中查找要删除的节点
+                t.left = this.remove(x,t.left);//递归查找后移除左边的子节点
+            }else if(compareResult > 0){
+                //从右子树中查找要删除的节点
+                t.right = this.remove(x,t.right);//递归查找后移除右边的子节点
+            }else if(t.left != null && t.right != null){
+                //删除的节点下有两个子节点的情况
+                //找到删除节点下右边的子节点 此时右边的子节点大(所以忽略左边子节点)
+                //如果右边子节点下也有左右子节点,则通过findMin()方法找到最小节点,然后替换要删除的节点
+                //寻找替换节点
+                t.element = findMin(t.right).element;
+                //比较当前的删除的节点,然后将当前节点引用给右边子节点
+                t.right = remove(t.element,t.right);//递归查找后移除右边的
+            }else{
+               //只有一个子节点或者是根节点的情况
+                t = (t.left != null) ? t.left : t.right;
+            }
+            return balance(t);//平衡
         }
 
         //允许左右两树高度差（不平衡时）
