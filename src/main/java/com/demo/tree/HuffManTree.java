@@ -59,7 +59,7 @@ public class HuffManTree {
          */
          public static class HuffManNode<T> implements Comparable<HuffManNode>{
              private T element;
-             private int weight;//权重
+             private int weight;//权重-----》字母出现的频率
              private HuffManNode<T> left;//左子树
              private HuffManNode<T> right;//右子树
 
